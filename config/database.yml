@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: lembrarme_production
-  username: lembrarme
-  password: <%= ENV["LEMBRARME_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
