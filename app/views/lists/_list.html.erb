@@ -1,0 +1,23 @@
+<div id="<%= dom_id list %>">
+  <p>
+    <strong>Title:</strong>
+    <%= list.title %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= list.category %>
+  </p>
+
+  <p>
+    <ul>
+      <% @list.items.each do |item| %>
+        <li>
+          <%= item.description %>
+          <%= item.checked ? "(Checked)" : "(Unchecked)" %>
+        </li>
+      <% end %>
+    </ul>
+  </p>
+
+</div>

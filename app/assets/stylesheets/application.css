@@ -13,3 +13,118 @@
  *= require_tree .
  *= require_self
  */
+
+.no-spinner {
+    -moz-appearance: textfield;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.item-description.checked {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.status-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 24px;
+    z-index: 10;
+}
+
+.text-success {
+    color: #28a745;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.flash-notice {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px;
+    position: relative;
+    z-index: 1000;
+}
+
+.flash-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px;
+    position: relative;
+    z-index: 1000;
+    position: relative;
+}
+
+.category-todo {
+    background-color: #add8e6; /* azul claro */
+}
+
+.category-compras {
+    background-color: #ffa500; /* laranja claro */
+}
+
+.category-desejos {
+    background-color: #ff00ff; /* magenta */
+}
+
+.category-filmes {
+    background-color: #00008b; /* azul escuro */
+    color: #fff; /* texto branco para contraste */
+}
+
+.category-livros {
+    background-color: #90ee90; /* verde claro */
+}
+
+.category-musica {
+    background-color: #ff6347; /* vermelho */
+}
+
+.category-jogos {
+    background-color: #ffffff; /* branco */
+    border: 1px solid #cccccc; /* borda para destacar */
+}
+
+.category-outros {
+    background-color: #d3d3d3;
+}
+
+.card-link {
+    text-decoration: none;
+    display: block;
+}
+
+.card {
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    text-align: left;
+}

@@ -1,0 +1,48 @@
+<%= form_with(model: list, data: {
+  controller: "nested-form",
+  nested_form_wrapper_selector_value: ".nested-form-wrapper",
+}) do |f| %>
+  <% if list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
+      <ul>
+        <% list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.select :category, List.categories.keys.map { |key| [key.humanize, key] } %>
+  </div>
+
+  <div>
+    <%= f.label :deadline %>
+    <%= f.datetime_field :deadline %>
+  </div>
+
+  <template data-nested-form-target="template">
+    <%= f.fields_for :items do |item_fields| %>
+      <%= render "item_form", f: item_fields %>
+    <% end %>
+  </template>
+  <%= f.fields_for :items do |item_fields| %>
+    <%= render "item_form", f: item_fields %>
+  <% end %>
+
+  <div data-nested-form-target="target"></div>
+  <button data-action="nested-form#add" type="button">Add Item</button>
+
+  <div>
+    <%= f.submit "Salvar Lista", class: "btn btn-primary" %>
+  </div>
+<% end %>

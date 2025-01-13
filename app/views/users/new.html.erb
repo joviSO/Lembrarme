@@ -1,0 +1,38 @@
+<h1>Cadastro de Usuário</h1>
+
+<%= form_with model: @user, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "erro") %> encontrado(s):</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nickname, "Apelido" %>
+    <%= form.text_field :nickname, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, "E-mail" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, "Senha" %>
+    <%= form.password_field :password, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, "Confirmação de Senha" %>
+    <%= form.password_field :password_confirmation, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Cadastrar" %>
+  </div>
+<% end %>

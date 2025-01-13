@@ -1,0 +1,10 @@
+<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
+  <%= f.label :description, "Descrição" %>
+  <%= f.text_field :description, class: "form-control" %>
+
+  <%= f.label :value, "Valor" %>
+  <%= f.number_field :value, class: "no-spinner" %>
+
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+  <button type="button" class="btn btn-danger" data-action="nested-form#remove">Remover</button>
+</div>

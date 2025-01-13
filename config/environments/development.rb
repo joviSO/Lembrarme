@@ -1,6 +1,13 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.assets.debug = true # Exibe cada arquivo separado para facilitar a depuração.
+  config.assets.check_precompiled_asset = false # Não exige que os assets sejam pré-compilados.
+  config.assets.quiet = true
+  config.cache_classes = false # Não cacheia classes (útil para desenvolvimento).
+
+  # Permite que o Rails compile os assets dinamicamente no ambiente de desenvolvimento
+  config.assets.compile = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -72,5 +79,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Raise error when a before_action's only/except options reference missing actions
-  config.action_controller.raise_on_missing_callback_actions = true
+  config.action_controller.raise_on_missing_callback_actions = false
 end

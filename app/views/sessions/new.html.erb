@@ -1,0 +1,23 @@
+<h1>Login</h1>
+
+<%= form_with url: login_path, local: true do |f| %>
+  <div>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.submit "Entrar" %>
+    <button type="button" onclick="window.location.href='/signup'">Cadastrar</button>
+  </div>
+<% end %>
+
+<p>Não tem uma conta ainda?</p>
+<%= link_to "Crie sua conta agora", signup_path, class: "btn btn-secondary" %>

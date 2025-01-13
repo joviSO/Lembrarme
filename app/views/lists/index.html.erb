@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <div class="title">
+    <h1>Lembrar-me</h1>
+  </div>
+
+  <% if logged_in? %>
+    <%= button_to "Create New List", new_list_path, class: "btn btn-primary", data: { turbo_frame: "modal" }, method: :get %>
+    <%= button_to "Vaza", logout_path, class: "btn btn-danger", data: { turbo_frame: "modal" }, method: :delete %>
+  <% else %>
+    <%= button_to "Create New List", login_path, class: "btn btn-primary", data: { turbo_frame: "modal" }, method: :get %>
+  <% end %>
+
+  <div id="lists">
+    <div class="row">
+      <% @lists.each do |list| %>
+        <div class="col-md-4 mb-3">
+          <%= link_to list_path(list), class: "card-link" do %>
+            <div class="card <%= list.category_class %> position-relative">
+              <div class="card-header">
+                <h5><%= list.title %> (<%= list.category.humanize %>)</h5>
+                <div class="status-icon">
+                  <% if list.sucesso? %>
+                    <i class="fas fa-check-circle text-success"></i>
+                  <% elsif list.falha? %>
+                    <i class="fas fa-times-circle text-danger"></i>
+                  <% end %>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="items">
+                  <% list.items.each do |item| %>
+                    <div class="item" data-id="<%= item.id %>">
+                      <input type="checkbox" class="item-checkbox" <%= 'checked' if item.checked %>>
+                      <span class="item-description <%= 'checked' if item.checked %>"><%= item.description %></span>
+                    </div>
+                  <% end %>
+                </div>
+                <% if logged_in? %>
+                <div class="row">
+                  <div class="col-md-2 mt-2">
+                    <%= button_to "Editar", edit_list_path(list), class: "btn btn-secondary btn-sm", data: { turbo_frame: "modal" }, method: :get %>
+                  </div>
+                  <div class="col mt-2">
+                    <%= button_to "Apagar", list_path(list), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+                  </div>
+                </div>
+                <% else %>
+                  <div class="row">
+                    <div class="col-md-2 mt-2">
+                      <%= button_to "Editar", login_path, class: "btn btn-secondary btn-sm", method: :get %>
+                    </div>
+                    <div class="col mt-2">
+                      <%= button_to "Apagar", login_path, class: "btn btn-danger btn-sm", method: :get %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= paginate @lists %>
+</div>
