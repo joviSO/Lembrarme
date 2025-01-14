@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   resources :items
   resources :lists
 
-  root "lists#index" # Define sua página inicial (caso exista o controller `home`)
+  root "lists#index"
+
+  resources :items do
+    member do
+      patch :toggle_checked
+    end
+  end
 
   get "/signup", to: "users#new", as: "signup"
   post "/users", to: "users#create"

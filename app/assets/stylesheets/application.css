@@ -73,33 +73,37 @@
 }
 
 .category-todo {
-    background-color: #add8e6; /* azul claro */
+    background-color: #add8e6;
 }
 
 .category-compras {
-    background-color: #ffa500; /* laranja claro */
+    background-color: #ffa500;
 }
 
 .category-desejos {
-    background-color: #ff00ff; /* magenta */
+    background-color: #ff00ff;
 }
 
 .category-filmes {
-    background-color: #00008b; /* azul escuro */
-    color: #fff; /* texto branco para contraste */
+    background-color: #00008b;
+    color: #ffffff;
+}
+
+.category-filmes .text-muted {
+    color: white !important;
 }
 
 .category-livros {
-    background-color: #90ee90; /* verde claro */
+    background-color: #90ee90;
 }
 
 .category-musica {
-    background-color: #ff6347; /* vermelho */
+    background-color: #ff6347;
 }
 
 .category-jogos {
-    background-color: #ffffff; /* branco */
-    border: 1px solid #cccccc; /* borda para destacar */
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
 }
 
 .category-outros {
@@ -112,7 +116,6 @@
 }
 
 .card {
-    cursor: pointer;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -120,11 +123,39 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .card-body {
     text-align: left;
 }
+
+.transition-container {
+    width: 200%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.auth-form {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-body {
+    overflow: hidden;
+}
+
+.card-cadastro {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-items {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+

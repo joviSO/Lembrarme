@@ -10,6 +10,7 @@ class List < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
   validates :category, inclusion: { in: categories.keys }
   validates :repeat, inclusion: { in: [true, false] }
+  validate :deadline_cannot_be_in_the_past
 
   def update_status!
     if items.any? && items.all?(&:checked)
@@ -38,5 +39,12 @@ class List < ApplicationRecord
 
   def category_class
     "category-#{category}"
+  end
+
+  private
+  def deadline_cannot_be_in_the_past
+    if deadline.present? && deadline < DateTime.current-1.day
+      errors.add(:deadline, "não pode ser menor que a data atual")
+    end
   end
 end

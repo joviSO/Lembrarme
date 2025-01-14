@@ -43,4 +43,52 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => flashMessage.remove(), 500);
         }, 2000);
     }
+
+    const switchToSignup = document.getElementById("switchToSignup");
+    const switchToLogin = document.getElementById("switchToLogin");
+    const modalContent = document.getElementById("authModalContent");
+
+    switchToSignup.addEventListener("click", (e) => {
+        e.preventDefault();
+        modalContent.style.transform = "translateX(-50%)";
+    });
+
+    switchToLogin.addEventListener("click", (e) => {
+        e.preventDefault();
+        modalContent.style.transform = "translateX(0)";
+    });
+
+    function toggleChecked(itemId, currentChecked) {
+        fetch(`/items/${itemId}/toggle_checked`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ checked: !currentChecked }) // Inverte o estado
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Atualiza a interface do usuário dinamicamente (sem recarregar)
+                    const itemDiv = document.querySelector(`[data-id="${itemId}"]`);
+                    const button = itemDiv.querySelector("button");
+                    const span = itemDiv.querySelector("span");
+
+                    // Atualiza o texto do botão
+                    button.textContent = data.checked ? "Desmarcar" : "Marcar";
+                    button.className = data.checked ? "btn btn-sm ms-2 btn-secondary" : "btn btn-sm ms-2 btn-primary";
+
+                    // Atualiza a classe do texto
+                    if (data.checked) {
+                        span.classList.add("text-decoration-line-through", "text-muted");
+                    } else {
+                        span.classList.remove("text-decoration-line-through", "text-muted");
+                    }
+                } else {
+                    alert("Não foi possível atualizar o item.");
+                }
+            })
+            .catch(err => console.error("Erro ao alterar o estado do item:", err));
+    }
 });

@@ -1,38 +1,64 @@
-<h1>Cadastro de Usuário</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card-cadastro p-4" style="width: 100%; max-width: 400px;">
+    <h1>Cadastro de Usuário</h1>
 
-<%= form_with model: @user, local: true do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "erro") %> encontrado(s):</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= form_with model: @user, local: true do |form| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "erro") %> encontrado(s):</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :nickname, "Apelido" %>
-    <%= form.text_field :nickname, required: true %>
+      <div class="field cadastro">
+        <div class="col cadastro cadastro">
+          <div class="row cadastro cadastro">
+            <%= form.label :nickname, "Nome: " %>
+            <%= form.text_field :nickname, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="col cadastro">
+          <div class="row cadastro">
+            <%= form.label :email, "E-mail: " %>
+          </div>
+          <div class="row cadastro">
+            <%= form.email_field :email, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="col cadastro">
+          <div class="row cadastro">
+        <%= form.label :password, "Senha: " %>
+          </div>
+          <div class="row cadastro">
+        <%= form.password_field :password, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="col cadastro">
+          <div class="row cadastro">
+            <%= form.label :password_confirmation, "Confirmação de Senha: " %>
+          </div>
+          <div class="row cadastro">
+            <%= form.password_field :password_confirmation, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Cadastrar" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :email, "E-mail" %>
-    <%= form.email_field :email, required: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password, "Senha" %>
-    <%= form.password_field :password, required: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation, "Confirmação de Senha" %>
-    <%= form.password_field :password_confirmation, required: true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Cadastrar" %>
-  </div>
-<% end %>
+</div>

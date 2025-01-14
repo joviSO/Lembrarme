@@ -3,7 +3,12 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lists = current_user.present? ? current_user.lists.includes(:items).page(params[:page]) : List.none.page(params[:page])
+    sort_column = params[:order].presence || "id"
+    sort_direction = params[:direction].presence || "asc"
+
+    @lists = current_user.present? ? current_user.lists.includes(:items)
+                                                 .page(params[:page])
+                                                 .order(apply_sorting(sort_column, sort_direction)) : List.none.page(params[:page])
   end
 
   def new
@@ -57,4 +62,21 @@ class ListsController < ApplicationController
     params.require(:list).permit(:title, :category, :deadline, :status, :repeat, :repeat_end, :user_id,
                                  items_attributes: [:id, :description, :checked, :_destroy])
   end
+
+  def apply_sorting(column, direction)
+    case column
+    when "title"
+      Arel.sql("LOWER(title) #{sanitize_direction(direction)}")
+    when "category"
+      "#{column} #{sanitize_direction(direction)}"
+    when "deadline"
+      Arel.sql("deadline IS NULL, deadline #{sanitize_direction(direction)}")
+    else
+      "#{column} #{sanitize_direction(direction)}"
+    end
+  end
+
+    def sanitize_direction(direction)
+      %w[asc desc].include?(direction) ? direction.upcase : "ASC"
+    end
 end

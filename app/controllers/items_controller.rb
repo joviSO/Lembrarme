@@ -57,6 +57,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def toggle_checked
+    @item = Item.find(params[:id])
+
+    if @item.update(checked: params[:checked])
+      render json: { success: true, checked: @item.checked }
+    else
+      render json: { success: false, error: @item.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

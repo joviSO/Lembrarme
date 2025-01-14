@@ -1,10 +1,10 @@
-<h1>Editing list</h1>
+<h1>Atualizar Lista</h1>
 
 <%= render "form", list: @list %>
 
 <br>
 
-<div>
-  <%= link_to "Show this list", @list %> |
-  <%= link_to "Back to lists", lists_path %>
+<div class="ml-4">
+  <%= button_to "Show this list", @list, class: "btn btn-primary mb-2", method: :get %>
+  <%= button_to "Back to lists", lists_path, class: "btn btn-success", method: :get %>
 </div>

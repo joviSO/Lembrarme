@@ -2,9 +2,9 @@
 
 <%= render @list %>
 
-<div>
-  <%= link_to "Edit this list", edit_list_path(@list) %> |
-  <%= link_to "Back to lists", lists_path %>
+  <div class="d-flex justify-content-start gap-2 mt-3">
+  <%= button_to "Editar", edit_list_path(@list), class: "btn btn-success", method: :get %>
+  <%= button_to "Listas", lists_path, class: "btn btn-outline-secondary", method: :get %>
 
-  <%= button_to "Destroy this list", @list, method: :delete %>
-</div>
+  <%= button_to "Apagar lista", @list, class: "btn btn-danger", method: :delete %>
+  </div>
