@@ -1,24 +1,33 @@
 <div class="container mt-5">
   <div class="text-center mb-4">
-    <h1 class="display-4">Lembrar-me</h1>
+    <div class="row">
+      <div class="col-md-12 mb-3 mt-3">
+        <h1 class="display-4">Lembrar-me</h1>
+      </div>
+    </div>
     <p class="text-muted">Gerencie suas listas e tarefas de maneira eficiente</p>
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">
+      Fazer Login
+    </button>
   </div>
 
-  <form method="get" action="<%= lists_path %>" class="d-flex justify-content-end mb-4">
-    <select name="order" class="form-select w-auto me-2">
-      <option value="id" <%= "selected" if params[:order].blank? || params[:order] == "id" %>>Ordenar por Criação</option>
-      <option value="title" <%= "selected" if params[:order] == "title" %>>Ordenar por Nome</option>
-      <option value="category" <%= "selected" if params[:order] == "category" %>>Ordenar por Categoria</option>
-      <option value="deadline" <%= "selected" if params[:order] == "deadline" %>>Ordenar por Prazo</option>
-    </select>
+  <% if current_user %>
+    <form method="get" action="<%= lists_path %>" class="d-flex justify-content-end mb-4">
+      <select name="order" class="form-select w-auto me-2">
+        <option value="id" <%= "selected" if params[:order].blank? || params[:order] == "id" %>>Ordenar por Criação</option>
+        <option value="title" <%= "selected" if params[:order] == "title" %>>Ordenar por Nome</option>
+        <option value="category" <%= "selected" if params[:order] == "category" %>>Ordenar por Categoria</option>
+        <option value="deadline" <%= "selected" if params[:order] == "deadline" %>>Ordenar por Prazo</option>
+      </select>
 
-    <select name="direction" class="form-select w-auto me-2">
-      <option value="asc" <%= "selected" if params[:direction].blank? || params[:direction] == "asc" %>>Ascendente</option>
-      <option value="desc" <%= "selected" if params[:direction] == "desc" %>>Descendente</option>
-    </select>
+      <select name="direction" class="form-select w-auto me-2">
+        <option value="asc" <%= "selected" if params[:direction].blank? || params[:direction] == "asc" %>>Ascendente</option>
+        <option value="desc" <%= "selected" if params[:direction] == "desc" %>>Descendente</option>
+      </select>
 
-    <button type="submit" class="btn btn-primary">Ordenar</button>
-  </form>
+      <button type="submit" class="btn btn-primary">Ordenar</button>
+    </form>
+  <% end %>
 
   <div class="d-flex justify-content-center mb-4">
     <% if logged_in? %>
@@ -62,12 +71,10 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center item-toggle <%= item.checked ? 'text-muted' : '' %>"
                       data-item-id="<%= item.id %>"
                       data-checked="<%= item.checked %>">
-                    <!-- Descrição do item -->
                     <span class="item-description <%= item.checked ? 'text-decoration-line-through' : '' %>">
                     <%= item.description %>
                   </span>
 
-                    <!-- Estado do item -->
                     <span class="badge bg-<%= item.checked ? 'success' : 'warning' %> rounded-pill">
                     <%= item.checked ? "Checkado" : "Não Checkado" %>
                   </span>
@@ -99,26 +106,23 @@
 
 
 <script>
-    // Captura cliques nos itens das listas
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".item-toggle").forEach(item => {
             item.addEventListener("click", (event) => {
                 const itemId = item.dataset.itemId;
                 const currentChecked = item.dataset.checked === "true";
 
-                // Enviar requisição para alternar o valor de checked
                 fetch(`/items/${itemId}/toggle_checked`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
                         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
                     },
-                    body: JSON.stringify({ checked: !currentChecked }) // Inverte o estado atual
+                    body: JSON.stringify({ checked: !currentChecked })
                 })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            // Atualiza dinamicamente a interface
                             item.dataset.checked = data.checked; // Atualiza o estado
                             const description = item.querySelector(".item-description");
                             const badge = item.querySelector(".badge");
