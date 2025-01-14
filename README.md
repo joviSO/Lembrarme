@@ -103,3 +103,14 @@ Este projeto está sob a licença **MIT**. Sinta-se livre para usar, modificar e
 ---
 
 Feito com 💙 por [joviSO]. 😊
+
+## Features
+
+Autentição de usuario;\
+usuario apenas interage com o que é seu;
+
+## Bugs conhecidos
+
+Existe um bug na hora de listar os To Dos, cada item tem seu estado e eles podem sem modificados apenas clicando na tag **li**, mas por algum motivo a pagina precisa ser recarregada para isso;\
+Na hora de Editar listas são gerados novos campos que não precisam ser preenchidos, mas precisam ser removidos manualmente;\
+Quando se adicionam novos items na tela de Edição aparecem a quantidade de campos igual aos campos que haviam previamente;
