@@ -6,9 +6,11 @@
       </div>
     </div>
     <p class="text-muted">Gerencie suas listas e tarefas de maneira eficiente</p>
-    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">
-      Fazer Login
-    </button>
+    <% unless current_user %>
+      <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">
+        Fazer Login
+      </button>
+    <% end %>
   </div>
 
   <% if current_user %>
