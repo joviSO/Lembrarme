@@ -18,7 +18,7 @@
         <div class="col cadastro cadastro">
           <div class="row cadastro cadastro">
             <%= form.label :nickname, "Nome: " %>
-            <%= form.text_field :nickname, required: true %>
+            <%= form.text_field :nickname, required: true, placeholder: "Seu apelido" %>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
             <%= form.label :email, "E-mail: " %>
           </div>
           <div class="row cadastro">
-            <%= form.email_field :email, required: true %>
+            <%= form.email_field :email, required: true, placeholder: "teste@teste.com" %>
           </div>
         </div>
       </div>
@@ -37,10 +37,10 @@
       <div class="field">
         <div class="col cadastro">
           <div class="row cadastro">
-        <%= form.label :password, "Senha: " %>
+            <%= form.label :password, "Senha: " %>
           </div>
           <div class="row cadastro">
-        <%= form.password_field :password, required: true %>
+            <%= form.password_field :password, required: true, placeholder: "******" %>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
             <%= form.label :password_confirmation, "Confirmação de Senha: " %>
           </div>
           <div class="row cadastro">
-            <%= form.password_field :password_confirmation, required: true %>
+            <%= form.password_field :password_confirmation, required: true, placeholder: "******"%>
           </div>
         </div>
       </div>
