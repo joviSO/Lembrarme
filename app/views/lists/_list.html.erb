@@ -1,41 +1,40 @@
 <%= content_for :title, "Detalhes da Lista: #{list.title}" %>
 
-<div class="container mt-4">
-  <div class="card">
-    <div class="card-body">
-      <!-- Linha para o título da lista e prazo -->
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="card-title text-primary mb-0">
-          <%= link_to list.title, list_path(list) %>
-        </h4>
-        <p class="text-muted mb-0">
-          <% if list.deadline.present? %>
-            <i class="fas fa-calendar-alt"></i> Prazo: <%= list.deadline.strftime("%d/%m/%Y") %>
-          <% else %>
-            <i class="fas fa-calendar-times"></i> Não tem prazo de expiração
-          <% end %>
-        </p>
-      </div>
+<div class="card">
+  <div class="card-body">
+    <!-- Linha para o título da lista e prazo -->
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="card-title text-primary mb-0">
+        <%= link_to list.title, list_path(list) %>
+      </h4>
+      <p class="text-muted mb-0">
+        <% if list.deadline.present? %>
+          <i class="fas fa-calendar-alt"></i> Prazo: <%= list.deadline.strftime("%d/%m/%Y") %>
+        <% else %>
+          <i class="fas fa-calendar-times"></i> Não tem prazo de expiração
+        <% end %>
+      </p>
+    </div>
   </div>
+</div>
 
-  <div class="mt-4">
-    <h4>Itens da Lista</h4>
-    <ul class="list-group" id="items-list">
-      <% @list.items.each do |item| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center item-toggle <%= item.checked ? 'bg-light text-muted' : '' %>"
-            data-item-id="<%= item.id %>"
-            data-checked="<%= item.checked %>">
-          <span class="item-description <%= item.checked ? 'text-decoration-line-through' : '' %>">
-            <%= item.description %>
-          </span>
+<div class="mt-4">
+  <h4>Itens da Lista</h4>
+  <ul class="list-group" id="items-list">
+    <% @list.items.each do |item| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center item-toggle <%= item.checked ? 'bg-light text-muted' : '' %>"
+          data-item-id="<%= item.id %>"
+          data-checked="<%= item.checked %>">
+        <span class="item-description <%= item.checked ? 'text-decoration-line-through' : '' %>">
+          <%= item.description %>
+        </span>
 
-          <span class="badge bg-<%= item.checked ? 'success' : 'warning' %> rounded-pill">
-            <%= item.checked ? "Checkado" : "Não Checkado" %>
-          </span>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+        <span class="badge bg-<%= item.checked ? 'success' : 'warning' %> rounded-pill">
+          <%= item.checked ? "Checkado" : "Não Checkado" %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <script>
@@ -51,7 +50,7 @@
                         "Content-Type": "application/json",
                         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
                     },
-                    body: JSON.stringify({ checked: !currentChecked }) // Inverte o estado atual
+                    body: JSON.stringify({ checked: !currentChecked })
                 })
                     .then(response => response.json())
                     .then(data => {
@@ -61,12 +60,12 @@
                             const badge = item.querySelector(".badge");
 
                             if (data.checked) {
-                                item.classList.add("bg-light", "text-muted");
+                                item.classList.add("text-muted");
                                 description.classList.add("text-decoration-line-through");
                                 badge.textContent = "Checkado";
                                 badge.className = "badge bg-success rounded-pill";
                             } else {
-                                item.classList.remove("bg-light", "text-muted");
+                                item.classList.remove("text-muted");
                                 description.classList.remove("text-decoration-line-through");
                                 badge.textContent = "Não Checkado";
                                 badge.className = "badge bg-warning rounded-pill";
