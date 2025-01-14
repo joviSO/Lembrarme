@@ -70,16 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Atualiza a interface do usuário dinamicamente (sem recarregar)
                     const itemDiv = document.querySelector(`[data-id="${itemId}"]`);
                     const button = itemDiv.querySelector("button");
                     const span = itemDiv.querySelector("span");
 
-                    // Atualiza o texto do botão
                     button.textContent = data.checked ? "Desmarcar" : "Marcar";
                     button.className = data.checked ? "btn btn-sm ms-2 btn-secondary" : "btn btn-sm ms-2 btn-primary";
 
-                    // Atualiza a classe do texto
                     if (data.checked) {
                         span.classList.add("text-decoration-line-through", "text-muted");
                     } else {

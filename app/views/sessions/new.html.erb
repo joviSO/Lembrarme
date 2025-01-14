@@ -1,23 +1,34 @@
-<h1>Login</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card-cadastro p-4" style="width: 100%; max-width: 400px;">
+    <h1>Login</h1>
 
-<%= form_with url: login_path, local: true do |f| %>
-  <div>
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.submit "Entrar" %>
-    <button type="button" onclick="window.location.href='/signup'">Cadastrar</button>
-  </div>
-<% end %>
+    <%= form_with url: login_path, local: true do |f| %>
+      <div class="field">
+        <div class="col cadastro">
+          <div class="row cadastro">
+            <%= f.label :email %>
+          </div>
+          <div class="row cadastro">
+            <%= f.email_field :email %>
+          </div>
+        </div>
+      </div>
 
-<p>Não tem uma conta ainda?</p>
-<%= link_to "Crie sua conta agora", signup_path, class: "btn btn-secondary" %>
+      <div class="field">
+        <div class="col cadastro">
+          <div class="row cadastro">
+            <%= f.label :password %>
+          </div>
+          <div class="row cadastro">
+            <%= f.password_field :password %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions mt-3">
+        <%= f.submit "Entrar", class: "btn btn-primary" %>
+        <%= link_to "Cadastrar", signup_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

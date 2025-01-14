@@ -40,9 +40,9 @@
           <%= render "item_form", f: item_fields %>
         <% end %>
       </template>
-      <%= f.fields_for :items do |item_fields| %>
-        <%= render "item_form", f: item_fields %>
-      <% end %>
+        <%= f.fields_for :items do |item_fields| %>
+          <%= render "item_form", f: item_fields %>
+        <% end %>
 
       <div data-nested-form-target="target"></div>
       <button data-action="nested-form#add" type="button" class="btn btn-outline-secondary mt-2">
